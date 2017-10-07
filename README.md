@@ -2,6 +2,8 @@
 
 A simple zsh prompt theme. 
 
+![example](./prompt.png)
+
 ## Requirements
 Requires [zsh-git-prompt](https://github.com/leomeloxp/zsh-git-prompt)
 
