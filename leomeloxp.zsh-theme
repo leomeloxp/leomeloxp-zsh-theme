@@ -47,7 +47,7 @@ build_prompt() {
     echo -n "──"
     p_reset
     p_colour green
-    echo -n "%~"
+    echo -n " %~ "
     p_reset
     p_colour blue
     echo -n "──"
