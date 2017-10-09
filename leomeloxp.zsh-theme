@@ -77,16 +77,6 @@ build_prompt() {
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
-    RETVAL=$?
-    printf "\n"
-    p_colour blue
-    echo -n "└─"
-    p_reset
-    echo -n " `prompt_status` "
-    p_colour blue
-    echo -n "──"
-    p_reset
-}
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
 
