@@ -22,6 +22,16 @@ prompt_context() {
     fi
 }
 
+prompt_location() {
+  where=$PWD
+  home=$HOME
+  work="$home/Development"
+
+  where="${where/$work/Δ }"
+  where="${where/$home/α }"
+
+  echo -n "$where"
+}
 # Status:
 # - was there an error
 # - are there background jobs?
@@ -47,13 +57,15 @@ build_prompt() {
     echo -n "──"
     p_reset
     p_colour green
-    echo -n " %~ "
+    echo -n " `prompt_location` "
+    # echo -n " %~ "
     p_reset
     p_colour blue
     echo -n "──"
     p_reset
     echo -n " `git_super_status` "
     p_reset
+    RETVAL=$?
     printf "\n"
     p_colour blue
     echo -n "└─"
@@ -65,3 +77,23 @@ build_prompt() {
 }
 
 PROMPT='%{%f%b%k%}$(build_prompt) '
+    RETVAL=$?
+    printf "\n"
+    p_colour blue
+    echo -n "└─"
+    p_reset
+    echo -n " `prompt_status` "
+    p_colour blue
+    echo -n "──"
+    p_reset
+}
+
+PROMPT='%{%f%b%k%}$(build_prompt) '
+
+precmd(){
+    printf '\e]0;%s@%s: %s\a' "${prompt_user}" "${prompt_host}" "${prompt_char}"
+}
+
+preexec(){
+    printf '\e]0;%s [%s@%s: %s]\a' "$2" "${prompt_user}" "${prompt_host}" "${prompt_char}"		
+}
